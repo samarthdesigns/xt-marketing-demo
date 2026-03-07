@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 96%; /* Slightly darker than #F9F9F9 */
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 214 61% 22%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 173 72% 35%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 30%;
+    --accent: 216 20% 75%;
+    --accent-foreground: 214 61% 22%;
+    --destructive: 0 85% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 91%;
+    --input: 0 0% 91%;
+    --ring: 214 61% 22%;
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border shadow-none !important;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px; /* Increased by 2 points */
+  }
+
+  h1, h2, h3 { 
+    @apply font-bold tracking-tight text-[#000000]; 
+  }
+  
+  h4, h5, h6 {
+    @apply font-semibold tracking-tight text-[#000000];
+  }
+
+  p, span, div, label, input, textarea, button { 
+    @apply font-normal leading-relaxed text-[#4D4D4D]; 
+  }
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-progress {
+  animation: progress 2s ease-in-out infinite;
+}
