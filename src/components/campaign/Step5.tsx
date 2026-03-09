@@ -104,12 +104,12 @@ const Step5 = () => {
                 <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-widest mt-1">Memorize Bank • Q3 2024</p>
               </div>
               <div className="flex items-center gap-4">
-                <div className="bg-[#FCF0E9] px-4 py-2 rounded-sm border border-[#EA1313]/10 flex items-center gap-3">
-                  <AlertCircle size={14} className="text-[#EA1313]" />
-                  <p className="text-[10px] font-black text-[#EA1313] uppercase tracking-widest">Awaiting Manager Approval</p>
+                <div className="bg-red-50/50 px-4 py-2 rounded-sm border border-red-100 flex items-center gap-3">
+                  <AlertCircle size={14} className="text-red-800" />
+                  <p className="text-[10px] font-black text-red-800 uppercase tracking-widest">Awaiting Manager Approval</p>
                   <button 
                     onClick={() => showSuccess("Approval request sent to manager.")}
-                    className="ml-2 text-[9px] font-black text-white bg-[#EA1313] px-3 py-1 rounded-sm uppercase tracking-widest hover:bg-[#230B00] transition-colors"
+                    className="ml-2 text-[9px] font-black text-white bg-red-700 px-3 py-1 rounded-sm uppercase tracking-widest hover:bg-red-800 transition-colors"
                   >
                     Request
                   </button>

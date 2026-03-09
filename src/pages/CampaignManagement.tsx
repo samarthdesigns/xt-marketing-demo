@@ -106,7 +106,7 @@ const CampaignManagement = () => {
                         <div className="overflow-hidden">
                           <p className="text-[8px] font-black uppercase tracking-widest text-[#4D4D4D]">Step 0{step.id}</p>
                           <h3 className="font-black text-[11px] text-[#000000] uppercase tracking-tight truncate">{step.title}</h3>
-                          <p className="text-[9px] font-medium text-[#B3BDCC] uppercase tracking-tighter truncate">{step.sub}</p>
+                          <p className="text-[9px] font-black text-[#000000] uppercase tracking-tighter truncate">{step.sub}</p>
                         </div>
                       </div>
                     </button>

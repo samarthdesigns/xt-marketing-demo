@@ -38,14 +38,14 @@ const Step1 = ({ onNext }: { onNext: () => void }) => {
             <h3 className="text-base font-black text-[#16335A] tracking-widest uppercase">Strategic Blueprint</h3>
             <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-[0.2em] mt-0.5">Memorial AI Intelligence Engine</p>
           </div>
-          <div className="bg-[#FCF0E9] px-5 py-2 rounded-sm border border-[#EA1313]/10 flex items-center gap-4">
+          <div className="bg-red-50/50 px-5 py-2 rounded-sm border border-red-100 flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <AlertCircle size={14} className="text-[#EA1313]" />
-              <p className="text-[10px] font-black text-[#EA1313] uppercase tracking-widest">Awaiting Manager Approval</p>
+              <AlertCircle size={14} className="text-red-800" />
+              <p className="text-[10px] font-black text-red-800 uppercase tracking-widest">Awaiting Manager Approval</p>
             </div>
             <button 
               onClick={handleRequestApproval}
-              className="text-[9px] font-black text-white bg-[#EA1313] px-3 py-1 rounded-sm uppercase tracking-widest hover:bg-[#230B00] transition-colors"
+              className="text-[9px] font-black text-white bg-red-700 px-3 py-1 rounded-sm uppercase tracking-widest hover:bg-red-800 transition-colors"
             >
               Request
             </button>
