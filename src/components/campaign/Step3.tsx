@@ -84,7 +84,7 @@ const Step3 = ({ onNext }: { onNext: () => void }) => {
 
   const handleApproveAll = () => {
     setFinalizedAssets(assets.map(a => a.id));
-    showSuccess("All assets approved for validation.");
+    showSuccess("All deliverables approved for validation.");
   };
 
   const handleBringSpecialist = () => {
@@ -111,14 +111,14 @@ const Step3 = ({ onNext }: { onNext: () => void }) => {
           <div className="bg-[#F9F9F9] px-10 py-6 border-b border-[#E8E8E8] flex items-center justify-between">
             <div>
               <h3 className="text-base font-black text-[#16335A] tracking-widest uppercase">Production Studio</h3>
-              <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-[0.2em] mt-0.5">AI-Assisted Content Generation</p>
+              <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-[0.2em] mt-0.5">Memorial AI-Assisted Content Generation</p>
             </div>
             <Button 
               onClick={handleApproveAll}
               size="sm"
               className="bg-[#19998B] hover:bg-[#16335A] text-white rounded-md h-10 px-8 font-black text-[10px] uppercase tracking-widest"
             >
-              Approve All Assets
+              Approve All Deliverables
             </Button>
           </div>
 
@@ -217,7 +217,7 @@ const Step3 = ({ onNext }: { onNext: () => void }) => {
             size="sm"
             className="bg-[#19998B] hover:bg-[#16335A] text-white rounded-none h-9 px-6 font-black text-[10px] uppercase tracking-widest"
           >
-            Finalize Asset
+            Finalize Deliverable
           </Button>
         </div>
       </header>
@@ -301,7 +301,7 @@ const Step3 = ({ onNext }: { onNext: () => void }) => {
                       <span className="text-[#19998B]">import</span> React <span className="text-[#19998B]">from</span> <span className="text-[#E4F1CD]">'react'</span>;{"\n"}
                       <span className="text-[#19998B]">import</span> {"{ Button }"} <span className="text-[#19998B]">from</span> <span className="text-[#E4F1CD]">{'@/components/ui/button'}</span>;{"\n"}
                       {"\n"}
-                      <span className="text-[#19998B]">const</span> <span className="text-[#19998B]">CampaignAsset</span> = () <span className="text-[#19998B]">{"=>"}</span> {"{"}{"\n"}
+                      <span className="text-[#19998B]">const</span> <span className="text-[#19998B]">CampaignDeliverable</span> = () <span className="text-[#19998B]">{"=>"}</span> {"{"}{"\n"}
                       {"  "}<span className="text-[#19998B]">return</span> ({"\n"}
                       {"    "}<span className="text-[#19998B]">{"<div"}</span> <span className="text-[#19998B]">className</span>=<span className="text-[#E4F1CD]">{"\"min-h-screen bg-white\""}</span><span className="text-[#19998B]">{">"}</span>{"\n"}
                       {"      "}<span className="text-[#19998B]">{"<header"}</span> <span className="text-[#19998B]">className</span>=<span className="text-[#E4F1CD]">{"\"p-10 border-b\""}</span><span className="text-[#19998B]">{">"}</span>{"\n"}
@@ -313,7 +313,7 @@ const Step3 = ({ onNext }: { onNext: () => void }) => {
                       {"  "});{"\n"}
                       {"};"}{"\n"}
                       {"\n"}
-                      <span className="text-[#19998B]">export default</span> CampaignAsset;
+                      <span className="text-[#19998B]">export default</span> CampaignDeliverable;
                     </pre>
                   </div>
                 </ScrollArea>
@@ -329,7 +329,7 @@ const Step3 = ({ onNext }: { onNext: () => void }) => {
                 <Sparkles size={20} />
               </div>
               <div>
-                <span className="font-black text-[#000000] text-[11px] uppercase tracking-widest">Creative Assistant</span>
+                <span className="font-black text-[#000000] text-[11px] uppercase tracking-widest">Memorial AI Assistant</span>
                 <div className="flex items-center gap-2 mt-0.5">
                   <div className="w-1.5 h-1.5 bg-[#19998B] rounded-full animate-pulse" />
                   <p className="text-[9px] font-black text-[#4D4D4D] uppercase tracking-widest">Ready to refine</p>

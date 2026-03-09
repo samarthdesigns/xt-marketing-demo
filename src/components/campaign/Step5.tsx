@@ -120,7 +120,7 @@ const Step5 = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
               {[
                 { label: 'Strategy', value: 'Financial Co-Pilot', color: 'text-[#16335A]' },
-                { label: 'Assets', value: '4 Deliverables', color: 'text-[#19998B]' },
+                { label: 'Deliverables', value: '4 Items', color: 'text-[#19998B]' },
                 { label: 'QA Status', value: '100% Passed', color: 'text-[#19998B]' },
                 { label: 'Forecast', value: '4.8% Conv.', color: 'text-[#16335A]' }
               ].map((stat, i) => (
@@ -132,7 +132,7 @@ const Step5 = () => {
             </div>
 
             <div className="space-y-6 mb-10">
-              <h5 className="font-black text-[#000000] text-base uppercase tracking-tight">Asset Showcase</h5>
+              <h5 className="font-black text-[#000000] text-base uppercase tracking-tight">Deliverable Showcase</h5>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {assets.map((asset, i) => (
                   <div key={i} className="bg-white border border-[#E8E8E8] rounded-md overflow-hidden p-6 flex flex-col gap-4">
@@ -160,7 +160,7 @@ const Step5 = () => {
                             <div className="flex items-center gap-6">
                               <div>
                                 <h3 className="font-black text-[#000000] text-lg tracking-tight">{asset.name}</h3>
-                                <p className="text-[10px] font-black text-[#16335A] uppercase tracking-widest">Final Asset Preview</p>
+                                <p className="text-[10px] font-black text-[#16335A] uppercase tracking-widest">Final Deliverable Preview</p>
                               </div>
                             </div>
                             <div className="flex items-center gap-6">
@@ -314,7 +314,7 @@ const Step5 = () => {
                           <Sparkles size={20} />
                         </div>
                         <div>
-                          <span className="font-black text-[#000000] text-[11px] uppercase tracking-widest">Readiness Assistant</span>
+                          <span className="font-black text-[#000000] text-[11px] uppercase tracking-widest">Memorial AI Assistant</span>
                           <div className="flex items-center gap-2 mt-0.5">
                             <div className="w-1.5 h-1.5 bg-[#19998B] rounded-full animate-pulse" />
                             <p className="text-[9px] font-black text-[#4D4D4D] uppercase tracking-widest">Analyzing Strategy</p>

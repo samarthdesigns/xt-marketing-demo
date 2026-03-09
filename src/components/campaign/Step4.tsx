@@ -80,7 +80,7 @@ const Step4 = ({ onNext }: { onNext: () => void }) => {
   const runTest = (id: number) => {
     setTestingStates(prev => ({ ...prev, [id]: 'running' }));
     let p = 0;
-    const steps = ["Initializing...", "Analyzing Assets...", "Simulating User Flow...", "Validating Standards...", "Complete"];
+    const steps = ["Initializing...", "Analyzing Deliverables...", "Simulating User Flow...", "Validating Standards...", "Complete"];
     const interval = setInterval(() => {
       p += 10;
       setTestProgress(prev => ({ ...prev, [id]: p }));

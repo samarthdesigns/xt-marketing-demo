@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { RefreshCw, AlertCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { showSuccess } from '@/utils/toast';
 
 const Step1 = ({ onNext }: { onNext: () => void }) => {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -26,17 +26,29 @@ const Step1 = ({ onNext }: { onNext: () => void }) => {
     }, 1500);
   };
 
+  const handleRequestApproval = () => {
+    showSuccess("Approval request sent to manager.");
+  };
+
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 w-full">
       <div className="bg-white border border-[#E8E8E8] rounded-md overflow-hidden shadow-sm">
         <div className="bg-[#F9F9F9] px-10 py-6 border-b border-[#E8E8E8] flex items-center justify-between">
           <div>
             <h3 className="text-base font-black text-[#16335A] tracking-widest uppercase">Strategic Blueprint</h3>
-            <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-[0.2em] mt-0.5">Memorial Bank Intelligence Engine</p>
+            <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-[0.2em] mt-0.5">Memorial AI Intelligence Engine</p>
           </div>
-          <div className="bg-[#FCF0E9] px-5 py-2 rounded-sm border border-[#EA1313]/10 flex items-center gap-2">
-            <AlertCircle size={14} className="text-[#EA1313]" />
-            <p className="text-[10px] font-black text-[#EA1313] uppercase tracking-widest">Awaiting Manager Approval</p>
+          <div className="bg-[#FCF0E9] px-5 py-2 rounded-sm border border-[#EA1313]/10 flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <AlertCircle size={14} className="text-[#EA1313]" />
+              <p className="text-[10px] font-black text-[#EA1313] uppercase tracking-widest">Awaiting Manager Approval</p>
+            </div>
+            <button 
+              onClick={handleRequestApproval}
+              className="text-[9px] font-black text-white bg-[#EA1313] px-3 py-1 rounded-sm uppercase tracking-widest hover:bg-[#230B00] transition-colors"
+            >
+              Request
+            </button>
           </div>
         </div>
 
@@ -83,7 +95,7 @@ const Step1 = ({ onNext }: { onNext: () => void }) => {
                         <h4 className="text-2xl font-black tracking-tight uppercase">Validated Strategy</h4>
                         <p className="text-[10px] font-black text-[#19998B] uppercase tracking-widest">Synthesis Complete • Ready for Architecture</p>
                       </div>
-                      <Badge className="bg-white text-[#16335A] border-[#16335A]/20 font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-sm">AI Generated</Badge>
+                      <Badge className="bg-white text-[#16335A] border-[#16335A]/20 font-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-sm">Memorial AI Generated</Badge>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">

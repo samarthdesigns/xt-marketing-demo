@@ -16,7 +16,7 @@ import {
   DialogFooter,
   DialogTrigger
 } from "@/components/ui/dialog";
-import { Mail, Instagram, FileText, Globe, Plus, Trash2, Sparkles, ChevronRight, History, TrendingUp, Target, Users, X } from 'lucide-react';
+import { Mail, Instagram, FileText, Globe, Plus, Trash2, Sparkles, ChevronRight, History, TrendingUp, Target, Users, X, CheckCircle2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { showSuccess } from '@/utils/toast';
 
@@ -45,11 +45,12 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
       <div className="bg-white border border-[#E8E8E8] rounded-md overflow-hidden shadow-sm">
         <div className="bg-[#F9F9F9] px-10 py-6 border-b border-[#E8E8E8] flex items-center justify-between">
           <div>
-            <h3 className="text-base font-black text-[#16335A] tracking-widest uppercase">Asset Architecture</h3>
+            <h3 className="text-base font-black text-[#16335A] tracking-widest uppercase">Deliverable Architecture</h3>
             <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-[0.2em] mt-0.5">Deliverable Mapping & Strategy</p>
           </div>
-          <div className="bg-white px-5 py-2 rounded-sm border border-[#E8E8E8]">
-            <p className="text-[10px] font-black text-[#19998B] uppercase tracking-widest">Strategy Approved</p>
+          <div className="bg-[#E4F1CD] px-5 py-2 rounded-sm border border-[#A7CF48]/20 flex items-center gap-2">
+            <CheckCircle2 size={14} className="text-[#1A2306]" />
+            <p className="text-[10px] font-black text-[#1A2306] uppercase tracking-widest">Strategy Approved</p>
           </div>
         </div>
 
@@ -85,15 +86,6 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
               <p className="text-[11px] font-black text-[#4D4D4D] uppercase tracking-widest">Add Deliverable</p>
             </button>
           </div>
-
-          <div className="flex justify-center pt-6">
-            <Button 
-              onClick={onNext}
-              className="bg-[#19998B] hover:bg-[#16335A] text-white rounded-none h-12 px-12 font-black text-xs uppercase tracking-widest shadow-xl transition-all hover:scale-105"
-            >
-              Continue to Production
-            </Button>
-          </div>
         </div>
       </div>
 
@@ -109,7 +101,7 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
                 <div>
                   <DialogTitle className="text-2xl font-black text-[#000000] uppercase tracking-tight">{selectedAsset?.name}</DialogTitle>
                   <DialogDescription className="text-[11px] font-black text-[#19998B] uppercase tracking-widest">
-                    {selectedAsset?.type} • Memorial Bank Asset v1.0
+                    {selectedAsset?.type} • Memorial AI Deliverable v1.0
                   </DialogDescription>
                 </div>
               </div>
@@ -124,7 +116,7 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
                   <Sparkles size={14} /> Strategic Intent
                 </h5>
                 <p className="text-lg text-[#000000] leading-relaxed font-medium">
-                  {selectedAsset?.desc} This asset is designed to capture the attention of students during their peak financial planning periods. We will focus on high-contrast visuals and clear, jargon-free language to build trust.
+                  {selectedAsset?.desc} This deliverable is designed to capture the attention of students during their peak financial planning periods. We will focus on high-contrast visuals and clear, jargon-free language to build trust.
                 </p>
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div className="p-5 bg-[#F9F9F9] rounded-sm border border-[#E8E8E8]">
@@ -190,7 +182,7 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
               <div>
                 <DialogTitle className="text-2xl font-black text-[#000000] uppercase tracking-tight">Add Deliverable</DialogTitle>
                 <DialogDescription className="text-[11px] font-black text-[#4D4D4D] uppercase tracking-widest">
-                  Define a new asset for the Voyage campaign
+                  Define a new deliverable for the Voyage campaign
                 </DialogDescription>
               </div>
               <button onClick={() => setIsAdding(false)} className="p-2 bg-[#16335A] text-white hover:bg-[#000000] rounded-sm transition-all">
@@ -200,16 +192,16 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
 
             <div className="p-10 space-y-8">
               <div className="space-y-3">
-                <Label className="text-[11px] font-black uppercase tracking-widest text-[#4D4D4D]">Asset Name</Label>
+                <Label className="text-[11px] font-black uppercase tracking-widest text-[#4D4D4D]">Deliverable Name</Label>
                 <Input placeholder="e.g. TikTok Series" className="rounded-sm border-[#E8E8E8] h-12 text-base font-medium px-5" />
               </div>
               <div className="space-y-3">
-                <Label className="text-[11px] font-black uppercase tracking-widest text-[#4D4D4D]">Asset Type</Label>
+                <Label className="text-[11px] font-black uppercase tracking-widest text-[#4D4D4D]">Deliverable Type</Label>
                 <Input placeholder="e.g. Social Video" className="rounded-sm border-[#E8E8E8] h-12 text-base font-medium px-5" />
               </div>
               <div className="space-y-3">
                 <Label className="text-[11px] font-black uppercase tracking-widest text-[#4D4D4D]">Strategic Details</Label>
-                <Textarea placeholder="Describe the goal of this asset..." className="min-h-[160px] rounded-sm border-[#E8E8E8] text-base font-medium p-5" />
+                <Textarea placeholder="Describe the goal of this deliverable..." className="min-h-[160px] rounded-sm border-[#E8E8E8] text-base font-medium p-5" />
               </div>
             </div>
 
