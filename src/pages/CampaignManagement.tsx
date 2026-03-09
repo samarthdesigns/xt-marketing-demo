@@ -9,12 +9,22 @@ import Step3 from '@/components/campaign/Step3';
 import Step4 from '@/components/campaign/Step4';
 import Step5 from '@/components/campaign/Step5';
 import { Button } from '@/components/ui/button';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription,
+  DialogFooter
+} from "@/components/ui/dialog";
 import { cn } from '@/lib/utils';
-import { Check, Target, Sparkles, PenTool, ShieldCheck, Rocket, ArrowRight, LayoutDashboard, ChevronRight } from 'lucide-react';
+import { Check, Target, Sparkles, PenTool, ShieldCheck, Rocket, ArrowRight, LayoutDashboard, ChevronRight, AlertCircle } from 'lucide-react';
+import { showSuccess } from '@/utils/toast';
 
 const CampaignManagement = () => {
   const [view, setView] = useState<'dashboard' | 'stepper'>('dashboard');
   const [currentStep, setCurrentStep] = useState(1);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
 
   const steps = [
     { id: 1, title: 'Strategy', sub: 'Define goals & audience', icon: Target, color: 'bg-[#16335A]' },
@@ -28,9 +38,22 @@ const CampaignManagement = () => {
     setCurrentStep(prev => Math.min(prev + 1, 5));
   };
 
+  const handleCampaignsClick = (e: React.MouseEvent) => {
+    if (view === 'stepper') {
+      e.preventDefault();
+      setShowSaveDialog(true);
+    }
+  };
+
+  const handleConfirmSave = () => {
+    setShowSaveDialog(false);
+    setView('dashboard');
+    showSuccess("Campaign draft saved successfully.");
+  };
+
   return (
     <div className="min-h-screen bg-[#F9F9F9]">
-      <TopBar />
+      <TopBar onCampaignsClick={handleCampaignsClick} />
       <main className="max-w-[1400px] mx-auto px-8 py-8">
         {view === 'dashboard' ? (
           <CampaignDashboard onNewCampaign={() => setView('stepper')} />
@@ -41,7 +64,7 @@ const CampaignManagement = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => setView('dashboard')}
+                  onClick={() => setShowSaveDialog(true)}
                   className="p-2 hover:bg-[#E8E8E8] rounded-md text-[#4D4D4D] hover:text-[#000000]"
                 >
                   <LayoutDashboard size={20} />
@@ -115,6 +138,41 @@ const CampaignManagement = () => {
           </div>
         )}
       </main>
+
+      {/* Save Draft Confirmation Dialog */}
+      <Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>
+        <DialogContent className="max-w-md p-0 border-none bg-white overflow-hidden rounded-md">
+          <div className="p-10 space-y-8">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-[#FCF0E9] rounded-full flex items-center justify-center text-[#EA1313]">
+                <AlertCircle size={32} />
+              </div>
+              <div className="space-y-2">
+                <DialogTitle className="text-2xl font-black text-[#000000] uppercase tracking-tight">Save Draft?</DialogTitle>
+                <DialogDescription className="text-sm font-medium text-[#4D4D4D]">
+                  You are about to leave the campaign orchestrator. Would you like to save your progress as a draft?
+                </DialogDescription>
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-3">
+              <Button 
+                onClick={handleConfirmSave}
+                className="w-full bg-[#16335A] hover:bg-[#000000] text-white rounded-none h-14 font-black text-sm uppercase tracking-widest shadow-lg"
+              >
+                Confirm (Save & Go)
+              </Button>
+              <Button 
+                variant="ghost"
+                onClick={() => setShowSaveDialog(false)}
+                className="w-full text-[#4D4D4D] hover:bg-[#F9F9F9] rounded-none h-14 font-black text-sm uppercase tracking-widest"
+              >
+                Cancel (Stay)
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

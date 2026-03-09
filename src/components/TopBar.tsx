@@ -4,7 +4,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
-const TopBar = () => {
+interface TopBarProps {
+  onCampaignsClick?: (e: React.MouseEvent) => void;
+}
+
+const TopBar = ({ onCampaignsClick }: TopBarProps) => {
   const location = useLocation();
   
   const navItems = [
@@ -22,12 +26,15 @@ const TopBar = () => {
         <nav className="flex items-center h-16">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
+            const isCampaigns = item.label === 'Campaigns';
+            
             return (
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={(e) => isCampaigns && onCampaignsClick ? onCampaignsClick(e) : null}
                 className={cn(
-                  "px-8 h-full flex items-center text-sm font-medium transition-all duration-300 border-b-2",
+                  "px-8 h-full flex items-center text-sm font-black uppercase tracking-widest transition-all duration-300 border-b-2",
                   isActive 
                     ? "bg-white/5 text-white border-[#19998B]" 
                     : "text-white/60 hover:text-white border-transparent hover:bg-white/5"
@@ -42,10 +49,10 @@ const TopBar = () => {
       
       <div className="flex items-center gap-4">
         <div className="text-right">
-          <p className="text-sm font-semibold text-white">Alex Marketer</p>
-          <p className="text-[10px] font-medium text-[#19998B]">Marketing Lead</p>
+          <p className="text-sm font-black text-white uppercase tracking-tight">Alex Marketer</p>
+          <p className="text-[10px] font-black text-[#19998B] uppercase tracking-widest">Marketing Lead</p>
         </div>
-        <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-xs border-2 border-white/20">
+        <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white font-black text-xs border-2 border-white/20">
           AM
         </div>
       </div>

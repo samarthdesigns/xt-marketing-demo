@@ -16,13 +16,14 @@ import {
   DialogFooter,
   DialogTrigger
 } from "@/components/ui/dialog";
-import { Mail, Instagram, FileText, Globe, Plus, Trash2, Sparkles, ChevronRight, History, TrendingUp, Target, Users, X, CheckCircle2 } from 'lucide-react';
+import { Mail, Instagram, FileText, Globe, Plus, Trash2, Sparkles, ChevronRight, History, TrendingUp, Target, Users, X, CheckCircle2, Edit3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { showSuccess } from '@/utils/toast';
 
 const Step2 = ({ onNext }: { onNext: () => void }) => {
   const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const [isAdding, setIsAdding] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [assets, setAssets] = useState([
     { id: 1, type: 'Email Campaign', name: 'Welcome Voyage', icon: Mail, desc: 'Introduction to the Voyage card and its core benefits.', color: 'text-[#16335A] bg-[#B3BDCC]/20' },
     { id: 2, type: 'Instagram Post', name: 'Credit Score 101', icon: Instagram, desc: 'Educational carousel on building credit history.', color: 'text-[#19998B] bg-[#C3E0DB]/20' },
@@ -38,6 +39,18 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
   const handleAddAsset = () => {
     setIsAdding(false);
     showSuccess("New deliverable added to architecture.");
+  };
+
+  const handleDeleteAsset = (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    setAssets(assets.filter(a => a.id !== id));
+    showSuccess("Deliverable removed from architecture.");
+  };
+
+  const handleSaveEdit = () => {
+    setAssets(assets.map(a => a.id === selectedAsset.id ? selectedAsset : a));
+    setIsEditing(false);
+    showSuccess("Deliverable details updated.");
   };
 
   return (
@@ -60,11 +73,19 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
               <Card 
                 key={asset.id} 
                 onClick={() => setSelectedAsset(asset)}
-                className="border border-[#E8E8E8] bg-white rounded-md overflow-hidden group hover:border-[#19998B] transition-all cursor-pointer shadow-none"
+                className="border border-[#E8E8E8] bg-white rounded-md overflow-hidden group hover:border-[#19998B] transition-all cursor-pointer shadow-none relative"
               >
                 <CardContent className="p-8">
-                  <div className={cn("w-12 h-12 rounded-sm flex items-center justify-center mb-6 border border-[#E8E8E8]", asset.color)}>
-                    <asset.icon size={24} />
+                  <div className="flex justify-between items-start mb-6">
+                    <div className={cn("w-12 h-12 rounded-sm flex items-center justify-center border border-[#E8E8E8]", asset.color)}>
+                      <asset.icon size={24} />
+                    </div>
+                    <button 
+                      onClick={(e) => handleDeleteAsset(e, asset.id)}
+                      className="p-2 text-[#B3BDCC] hover:text-[#EA1313] transition-colors"
+                    >
+                      <Trash2 size={18} />
+                    </button>
                   </div>
                   <h4 className="font-black text-[#000000] text-base mb-1.5">{asset.name}</h4>
                   <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-widest mb-4">{asset.type}</p>
@@ -90,7 +111,7 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
       </div>
 
       {/* Asset Detail Dialog */}
-      <Dialog open={!!selectedAsset} onOpenChange={() => setSelectedAsset(null)}>
+      <Dialog open={!!selectedAsset} onOpenChange={(open) => { if(!open) { setSelectedAsset(null); setIsEditing(false); } }}>
         <DialogContent className="max-w-3xl p-0 border-none bg-white overflow-hidden rounded-md">
           <div className="flex flex-col">
             <div className="p-10 border-b border-[#E8E8E8] bg-[#F9F9F9] flex justify-between items-start">
@@ -99,15 +120,42 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
                   {selectedAsset && <selectedAsset.icon size={28} />}
                 </div>
                 <div>
-                  <DialogTitle className="text-2xl font-black text-[#000000] uppercase tracking-tight">{selectedAsset?.name}</DialogTitle>
-                  <DialogDescription className="text-[11px] font-black text-[#19998B] uppercase tracking-widest">
-                    {selectedAsset?.type} • Memorial AI Deliverable v1.0
+                  {isEditing ? (
+                    <Input 
+                      value={selectedAsset?.name} 
+                      onChange={(e) => setSelectedAsset({...selectedAsset, name: e.target.value})}
+                      className="text-2xl font-black text-[#000000] uppercase tracking-tight bg-white border-[#E8E8E8] h-12"
+                    />
+                  ) : (
+                    <DialogTitle className="text-2xl font-black text-[#000000] uppercase tracking-tight">{selectedAsset?.name}</DialogTitle>
+                  )}
+                  <DialogDescription className="text-[11px] font-black text-[#19998B] uppercase tracking-widest mt-1">
+                    {isEditing ? (
+                      <Input 
+                        value={selectedAsset?.type} 
+                        onChange={(e) => setSelectedAsset({...selectedAsset, type: e.target.value})}
+                        className="h-8 text-[11px] font-black uppercase tracking-widest border-[#E8E8E8] mt-2"
+                      />
+                    ) : (
+                      `${selectedAsset?.type} • Memorial AI Deliverable v1.0`
+                    )}
                   </DialogDescription>
                 </div>
               </div>
-              <button onClick={() => setSelectedAsset(null)} className="p-2 bg-[#16335A] text-white hover:bg-[#000000] rounded-sm transition-all">
-                <X size={24} />
-              </button>
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => setIsEditing(!isEditing)}
+                  className={cn(
+                    "p-2 rounded-sm transition-all",
+                    isEditing ? "bg-[#19998B] text-white" : "bg-white border border-[#E8E8E8] text-[#4D4D4D] hover:text-[#16335A]"
+                  )}
+                >
+                  <Edit3 size={20} />
+                </button>
+                <button onClick={() => setSelectedAsset(null)} className="p-2 bg-[#16335A] text-white hover:bg-[#000000] rounded-sm transition-all">
+                  <X size={24} />
+                </button>
+              </div>
             </div>
 
             <div className="p-10 space-y-12 max-h-[60vh] overflow-y-auto">
@@ -115,9 +163,17 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
                 <h5 className="text-[11px] font-black text-[#4D4D4D] uppercase tracking-widest flex items-center gap-2">
                   <Sparkles size={14} /> Strategic Intent
                 </h5>
-                <p className="text-lg text-[#000000] leading-relaxed font-medium">
-                  {selectedAsset?.desc} This deliverable is designed to capture the attention of students during their peak financial planning periods. We will focus on high-contrast visuals and clear, jargon-free language to build trust.
-                </p>
+                {isEditing ? (
+                  <Textarea 
+                    value={selectedAsset?.desc}
+                    onChange={(e) => setSelectedAsset({...selectedAsset, desc: e.target.value})}
+                    className="min-h-[120px] text-lg text-[#000000] leading-relaxed font-medium border-[#E8E8E8]"
+                  />
+                ) : (
+                  <p className="text-lg text-[#000000] leading-relaxed font-medium">
+                    {selectedAsset?.desc} This deliverable is designed to capture the attention of students during their peak financial planning periods. We will focus on high-contrast visuals and clear, jargon-free language to build trust.
+                  </p>
+                )}
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div className="p-5 bg-[#F9F9F9] rounded-sm border border-[#E8E8E8]">
                     <p className="text-[10px] font-black text-[#4D4D4D] uppercase tracking-widest mb-1">Target CTR</p>
@@ -130,45 +186,53 @@ const Step2 = ({ onNext }: { onNext: () => void }) => {
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <h5 className="text-[11px] font-black text-[#4D4D4D] uppercase tracking-widest flex items-center gap-2">
-                  <History size={14} /> Similar Campaigns
-                </h5>
-                <div className="space-y-4">
-                  {previousCampaigns.map((camp, i) => (
-                    <div key={i} className="group cursor-pointer bg-white border border-[#E8E8E8] rounded-sm p-5 flex gap-5 hover:border-[#19998B] transition-all">
-                      <div className="w-24 h-24 rounded-sm overflow-hidden border border-[#E8E8E8] shrink-0">
-                        <img src={camp.thumb} alt={camp.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
-                      </div>
-                      <div className="flex-1 space-y-2">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <p className="text-base font-black text-[#000000]">{camp.name}</p>
-                            <p className="text-[10px] font-black text-[#19998B] uppercase tracking-widest">{camp.campaign}</p>
-                          </div>
-                          <Badge className="bg-[#E4F1CD] text-[#1A2306] border border-[#A7CF48]/20 text-[9px] px-2 py-0.5 rounded-sm font-black uppercase tracking-widest">Top Performer</Badge>
+              {!isEditing && (
+                <div className="space-y-6">
+                  <h5 className="text-[11px] font-black text-[#4D4D4D] uppercase tracking-widest flex items-center gap-2">
+                    <History size={14} /> Similar Campaigns
+                  </h5>
+                  <div className="space-y-4">
+                    {previousCampaigns.map((camp, i) => (
+                      <div key={i} className="group cursor-pointer bg-white border border-[#E8E8E8] rounded-sm p-5 flex gap-5 hover:border-[#19998B] transition-all">
+                        <div className="w-24 h-24 rounded-sm overflow-hidden border border-[#E8E8E8] shrink-0">
+                          <img src={camp.thumb} alt={camp.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                         </div>
-                        <div className="flex gap-6 pt-2">
-                          <div className="flex items-center gap-1.5">
-                            <TrendingUp size={12} className="text-[#19998B]" />
-                            <span className="text-[11px] font-bold text-[#4D4D4D]">{camp.performance}</span>
+                        <div className="flex-1 space-y-2">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="text-base font-black text-[#000000]">{camp.name}</p>
+                              <p className="text-[10px] font-black text-[#19998B] uppercase tracking-widest">{camp.campaign}</p>
+                            </div>
+                            <Badge className="bg-[#E4F1CD] text-[#1A2306] border border-[#A7CF48]/20 text-[9px] px-2 py-0.5 rounded-sm font-black uppercase tracking-widest">Top Performer</Badge>
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <Users size={12} className="text-[#16335A]" />
-                            <span className="text-[11px] font-bold text-[#4D4D4D]">{camp.reach} Reach</span>
+                          <div className="flex gap-6 pt-2">
+                            <div className="flex items-center gap-1.5">
+                              <TrendingUp size={12} className="text-[#19998B]" />
+                              <span className="text-[11px] font-bold text-[#4D4D4D]">{camp.performance}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <Users size={12} className="text-[#16335A]" />
+                              <span className="text-[11px] font-bold text-[#4D4D4D]">{camp.reach} Reach</span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div className="p-10 border-t border-[#E8E8E8] bg-[#F9F9F9]">
-              <Button onClick={() => setSelectedAsset(null)} className="w-full bg-[#16335A] hover:bg-[#000000] text-white rounded-none h-14 font-black text-sm uppercase tracking-widest shadow-lg">
-                Close Strategy View
-              </Button>
+              {isEditing ? (
+                <Button onClick={handleSaveEdit} className="w-full bg-[#19998B] hover:bg-[#16335A] text-white rounded-none h-14 font-black text-sm uppercase tracking-widest shadow-lg">
+                  Save Deliverable Changes
+                </Button>
+              ) : (
+                <Button onClick={() => setSelectedAsset(null)} className="w-full bg-[#16335A] hover:bg-[#000000] text-white rounded-none h-14 font-black text-sm uppercase tracking-widest shadow-lg">
+                  Close Strategy View
+                </Button>
+              )}
             </div>
           </div>
         </DialogContent>
